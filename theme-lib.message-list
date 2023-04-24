@@ -144,6 +144,23 @@
     </#if>
   </div>
 </#if>
+<#-- Get the page size from the request parameter, if it exists -->
+<#assign pageSize = RequestParameters.pageSize?c>
+
+<#-- If the page size is not specified or not a valid integer, default to 30 -->
+<#if pageSize?number < 1>
+    <#assign pageSize = 30>
+</#if>
+
+<#-- Use the pageSize variable in the LiQL query -->
+<#assign messages = LiqlQuery("
+    SELECT *
+    FROM messages
+    WHERE boardid = ${RequestParameters.boardid?c}
+    ORDER BY updated DESC
+    LIMIT ${pageSize?c}
+    OFFSET ${RequestParameters.page?number * pageSize?c - pageSize?c}
+")>
 <#-- pagination -->
 <#if showPaging == "true">
    <#assign pagingQry = basePagingQry + whereClause />
