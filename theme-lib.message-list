@@ -107,6 +107,43 @@
        </#list>
    </section>
 </div>
+<#-- Set the page size to 30 posts per page -->
+<#assign pageSize = 30>
+
+<#-- Retrieve the list of messages from the LiQL query -->
+<#assign messages = liql("SELECT * FROM messages ORDER BY created DESC LIMIT " + pageSize + " OFFSET " + ((page - 1) * pageSize))>
+
+<#-- Loop through the list of messages and display them -->
+<#list messages AS message>
+  <div class="message">
+    <div class="message-header">
+      <span class="message-author">${message.author}</span>
+      <span class="message-date">${message.created?string("dd.MM.yyyy HH:mm")}</span>
+    </div>
+    <div class="message-body">${message.body}</div>
+  </div>
+</#list>
+
+<#-- Display pagination links -->
+<#assign totalMessages = liql("SELECT COUNT(*) FROM messages")[0]["COUNT(*)"]>
+<#assign totalPages = (totalMessages / pageSize)?ceil>
+<#if totalPages > 1>
+  <div class="pagination">
+    <#if page > 1>
+      <a href="?page=${page - 1}">&lt;&lt; Prev</a>
+    </#if>
+    <#list 1..totalPages as pageNum>
+      <#if pageNum == page>
+        <span class="pagination-current">${pageNum}</span>
+      <#else>
+        <a href="?page=${pageNum}">${pageNum}</a>
+      </#if>
+    </#list>
+    <#if page < totalPages>
+      <a href="?page=${page + 1}">Next &gt;&gt;</a>
+    </#if>
+  </div>
+</#if>
 <#-- pagination -->
 <#if showPaging == "true">
    <#assign pagingQry = basePagingQry + whereClause />
