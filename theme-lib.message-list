@@ -196,6 +196,18 @@
             <@utilities.messageStatistics msg/>
         </div>
       <aside>
+        <div class="filters">
+          <h3>${text.format('theme-lib.message-list.sort-by')}</h3>
+          <select id="sort-by">
+              <option value="date">${text.format('theme-lib.message-list.sort-by-date')}</option>
+              <option value="kudos">${text.format('theme-lib.message-list.sort-by-kudos')}</option>
+              <option value="unanswered">${text.format('theme-lib.message-list.sort-by-unanswered')}</option>
+              <option value="unsolved">${text.format('theme-lib.message-list.sort-by-unsolved')}</option>
+          </select>
+          <#if !mobile_view>
+              ...
+          </#if>
+      </div>
         <div class="lia-info-area">
           <#assign reply_query = "SELECT author,view_href,id FROM messages WHERE parent.id = '${msg.id}' and author.id!='-1' ORDER BY post_time DESC LIMIT 1" />
           <#assign reply_result = commonUtils.executeLiQLQuery(reply_query) />
