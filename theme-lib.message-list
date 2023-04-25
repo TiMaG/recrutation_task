@@ -67,7 +67,6 @@
 <#-- get global scoped floated message -->
 <#assign baseGlobalQry = baseFloatQry + baseGlobalQryScope  + msg_label_query/>
 <#assign globalFloatedTopics = commonUtils.executeLiQLQuery(baseGlobalQry) />
- 
 <div class="custom-message-list">
    <section>
        <header>
@@ -187,7 +186,7 @@
         <div class="custom-message-header">
             <h3>
                 <#if msg.conversation.solved>
-                    <i class="${solved}"><small>${text.format('theme-lib.general.thread-solved')}!</small></i>
+                <i class="${solved-new}"><small>${text.format('theme-lib.general.thread-solved')}!</small></i>
                 </#if>
                 <a href="${msg.view_href}" title="${msg.subject}">
                     <#--${utils.html.truncate(140, msg.subject, '...')}-->
@@ -261,6 +260,7 @@
         </div>
       </div>
     </div>
+        <script type="text/javascript" src="app.js"></script>
    </article>
    <#--/custom message tile -->
 </#macro>
