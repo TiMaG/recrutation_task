@@ -53,3 +53,12 @@ function sortByUnsolved() {
   });
   $('#msg-list-container').html(messages);
 }
+$('#sort-by').on('change', function() {
+  var selectedOption = $(this).val();
+  if (selectedOption === 'date') {
+    sortByDate();
+  } else if (selectedOption === 'kudos') {
+    sortByKudos();
+  } else if (selectedOption === 'unanswered') {
+    sortByUnanswered();
+  } else if (selected
