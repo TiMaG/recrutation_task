@@ -26,6 +26,7 @@
  
 <#-- grab paging param -->
 <#assign pageSize = 30>
+<#assign threadCount = threadList?size>
  
 <#assign offset = (pageNum - 1) * pageSize?number />
  
