@@ -1,7 +1,9 @@
+// This function marks a thread as solved by adding the "solved-new" class to the thread's heading.
 function markThreadAsSolved(msg) {
     var thread = $('#thread-' + msg.id);
     thread.find('h3 a').addClass('solved-new');
 }
+// Sorts messages by date from newest to oldest
 function sortByDate() {
   var messages = $('.msg-list-item');
   messages.sort(function(a, b) {
@@ -11,7 +13,7 @@ function sortByDate() {
   });
   $('#msg-list-container').html(messages);
 }
-
+// Sorts messages by number of kudos from lowest to highest
 function sortByKudos() {
   var messages = $('.msg-list-item');
   messages.sort(function(a, b) {
@@ -21,7 +23,7 @@ function sortByKudos() {
   });
   $('#msg-list-container').html(messages);
 }
-
+// Sorts messages by whether they have any replies or not
 function sortByUnanswered() {
   var messages = $('.msg-list-item');
   messages.sort(function(a, b) {
@@ -37,7 +39,7 @@ function sortByUnanswered() {
   });
   $('#msg-list-container').html(messages);
 }
-
+// Sorts messages by whether they have been marked as solved or not
 function sortByUnsolved() {
   var messages = $('.msg-list-item');
   messages.sort(function(a, b) {
@@ -53,6 +55,7 @@ function sortByUnsolved() {
   });
   $('#msg-list-container').html(messages);
 }
+// Event listener for the <select> element that calls the appropriate sorting function based on the selected option
 $('#sort-by').on('change', function() {
   var selectedOption = $(this).val();
   if (selectedOption === 'date') {
